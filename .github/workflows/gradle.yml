@@ -38,9 +38,7 @@ jobs:
     steps:
     - name: loop through stuff 
       run: | 
-        $SCENARIOS
         for f in $SCENARIOS
-        $SCENARIOS
           do 
             echo f
           done
