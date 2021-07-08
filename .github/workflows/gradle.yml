@@ -38,12 +38,11 @@ jobs:
     steps:
     - name: loop through stuff 
       run: | 
-        echo $SCENARIOS
+        $SCENARIOS
         for f in $SCENARIOS
-        echo $SCENARIOS
+        $SCENARIOS
           do 
             echo f
-            echo $f
           done
     - uses: actions/download-artifact@v2
       with:
