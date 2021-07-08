@@ -45,7 +45,7 @@ jobs:
         echo "${{ steps.split.outputs._0}}"
         echo "${{ steps.split.outputs._2}}"
         for f in ${{ steps.split.outputs}}
-          echo ${{ steps.split.outputs._f}}   
+          echo ${{ steps.split.outputs }}   
     - uses: actions/download-artifact@v2
       with:
         name: artifact
