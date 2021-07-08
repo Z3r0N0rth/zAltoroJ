@@ -43,8 +43,9 @@ jobs:
         seperator: ', ' 
     - name: loop through stuff 
       run: | 
+        echo steps.split.outputs._0 == 'checkmarx-v9'
         for s in steps.split.outputs
-          echo "stuff"
+        
     - uses: actions/download-artifact@v2
       with:
         name: artifact
