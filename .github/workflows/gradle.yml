@@ -29,7 +29,6 @@ jobs:
         if-no-files-found: error # 'warn' or 'ignore' are also available, defaults to `warn` 
         path: ${{ github.workspace }}
   security:
-    needs: build
     runs-on: ubuntu-latest
     env:
       OWASP_DEPCHECK: WbJHgm_pSg-Ujk6Nt3mVdQ
@@ -42,7 +41,11 @@ jobs:
         name: artifact
     - name: loop through stuff 
       run: | 
-        for f in ${{ env.SCENARIOS }}; echo f; done
+        for f in ${{ env.SCENARIOS }}
+        do 
+          echo f
+        done
+        scenariolist = ${{ env.SCENARIOS }}.split(", ").toList()
     #- name: OWASP DepCheck
     #  run: | 
      #   docker run -e POLICY_ID=${{ env.OWASP_DEPCHECK }} -v $GITHUB_WORKSPACE:/code -v $GITHUB_WORKSPACE:/results -e CYBRIC_API_KEY=${{ secrets.ZN_API_KEY }} zeronorth/integration:latest python cybric.py
