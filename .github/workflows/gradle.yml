@@ -38,11 +38,11 @@ jobs:
     steps:
     - name: loop through stuff 
       run: | 
+        scenariolist = ${{ env.SCENARIOS }}.split(", ").toList()
         for f in ${{ env.SCENARIOS }}
         do 
           echo f
         done
-        scenariolist = ${{ env.SCENARIOS }}.split(", ").toList()
     - uses: actions/download-artifact@v2
       with:
         name: artifact
