@@ -36,9 +36,6 @@ jobs:
       VERACODE: AWP_2aS6ShSvBuysivS8gA
       SCENARIOS: "checkmarx-v9, owasp-dep-v5, nexusiq, sonarqube-v793, veracode"
     steps:
-    - uses: actions/download-artifact@v2
-      with:
-        name: artifact
     - name: loop through stuff 
       run: | 
         for f in ${{ env.SCENARIOS }}
@@ -46,6 +43,9 @@ jobs:
           echo f
         done
         scenariolist = ${{ env.SCENARIOS }}.split(", ").toList()
+    - uses: actions/download-artifact@v2
+      with:
+        name: artifact
     #- name: OWASP DepCheck
     #  run: | 
      #   docker run -e POLICY_ID=${{ env.OWASP_DEPCHECK }} -v $GITHUB_WORKSPACE:/code -v $GITHUB_WORKSPACE:/results -e CYBRIC_API_KEY=${{ secrets.ZN_API_KEY }} zeronorth/integration:latest python cybric.py
