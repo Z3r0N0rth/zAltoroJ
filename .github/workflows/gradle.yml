@@ -38,7 +38,7 @@ jobs:
     steps:
     - name: loop through stuff 
       run: | 
-        echo $env.SCENARIOS
+        print ${env:SCENARIOS}
         scenariolist = ${{ env.SCENARIOS }}.split(", ").toList()
         for f in ${{ env.SCENARIOS }}
         do 
