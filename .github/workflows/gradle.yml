@@ -44,7 +44,8 @@ jobs:
     - run: | 
        
         echo "${{ steps.split.outputs._2}}"
-        scenariolist = "${{ steps.split.outputs_$0}}"
+        number = 0
+        scenariolist = "${{ steps.split.outputs_$number}}"
         echo scenariolist
         for f in ${{ steps.split.outputs}}
           echo ${{ steps.split.outputs }}   
