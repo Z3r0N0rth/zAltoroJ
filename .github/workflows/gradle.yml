@@ -38,12 +38,14 @@ jobs:
     steps:
     - name: loop through stuff 
       run: | 
-        print ${env:SCENARIOS}
+        print(${env:SCENARIOS})
+        python -v
         scenariolist = ${{ env.SCENARIOS }}.split(", ").toList()
         for f in ${{ env.SCENARIOS }}
         do 
           echo f
         done
+      path: python
     - uses: actions/download-artifact@v2
       with:
         name: artifact
