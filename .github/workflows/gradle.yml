@@ -40,7 +40,7 @@ jobs:
       run: | 
         python --version
         scenariolist = ${{ env.SCENARIOS }}.split(", ").toList()
-        for f in ${{ env.SCENARIOS }}
+        for f in scenariolist
         do 
           echo f
         done
