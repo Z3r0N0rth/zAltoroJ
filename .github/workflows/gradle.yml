@@ -42,13 +42,13 @@ jobs:
         string: ${{ env.SCENARIOS }}
         split-by: ', '
     - run: | 
-       
         echo "${{ steps.split.outputs._2}}"
-        number = 0
-        scenariolist = "${{ steps.split.outputs_$number}}"
-        echo scenariolist
-        for f in ${{ steps.split.outputs}}
-          echo ${{ steps.split.outputs }}   
+        number = "${{ steps.split.outputs._2}}"
+        echo number
+        for f in jobs.security.env
+          echo "${{ env.f }}"
+      #  echo scenariolist
+  
     - uses: actions/download-artifact@v2
       with:
         name: artifact
