@@ -38,7 +38,7 @@ jobs:
     steps:
     - name: loop through stuff 
       run: | 
-        for f in $SCENARIOS
+        for f in ${{ env.SCENARIOS }}
           do 
             echo f
           done
