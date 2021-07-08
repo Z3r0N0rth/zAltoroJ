@@ -42,8 +42,10 @@ jobs:
         string: ${{ env.SCENARIOS }}
         split-by: ', '
     - run: | 
-        echo "${{ steps.split.outputs._0}}"
+       
         echo "${{ steps.split.outputs._2}}"
+        scenariolist = "${{ steps.split.outputs_$0}}"
+        echo scenariolist
         for f in ${{ steps.split.outputs}}
           echo ${{ steps.split.outputs }}   
     - uses: actions/download-artifact@v2
