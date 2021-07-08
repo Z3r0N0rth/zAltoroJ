@@ -38,7 +38,6 @@ jobs:
     steps:
     - name: loop through stuff 
       run: | 
-        print(${env:SCENARIOS})
         python -v
         scenariolist = ${{ env.SCENARIOS }}.split(", ").toList()
         for f in ${{ env.SCENARIOS }}
