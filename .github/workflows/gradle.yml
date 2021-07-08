@@ -38,7 +38,7 @@ jobs:
       LIST: WbJHgm_pSg-Ujk6Nt3mVdQ I33Mh0P1TwG9HuKHWkC3ug
     steps:
     - name: run loop
-      run: for f in $LIST; do docker run -e POLICY_ID=${{ f }} -v $GITHUB_WORKSPACE:/code -v $GITHUB_WORKSPACE:/results -e CYBRIC_API_KEY=${{ secrets.ZN_API_KEY }} zeronorth/integration:latest python cybric.py; done
+      run: for f in $LIST; do docker run -e POLICY_ID=f -v $GITHUB_WORKSPACE:/code -v $GITHUB_WORKSPACE:/results -e CYBRIC_API_KEY=${{ secrets.ZN_API_KEY }} zeronorth/integration:latest python cybric.py; done
     - uses: rishabhgupta/split-by@v1
       id: split
       with:
@@ -46,11 +46,6 @@ jobs:
         split-by: ', '
     - run: | 
         echo "${{ steps.split.outputs._2}}"
-        number = "${{ steps.split.outputs._2}}"
-        echo number
-        for f in jobs.security.env
-          echo "${{ env.f }}"
-      #  echo scenariolist
   
     - uses: actions/download-artifact@v2
       with:
