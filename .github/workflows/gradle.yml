@@ -38,7 +38,7 @@ jobs:
     steps:
     - name: loop through stuff 
       run: | 
-        python -v
+        python --version
         scenariolist = ${{ env.SCENARIOS }}.split(", ").toList()
         for f in ${{ env.SCENARIOS }}
         do 
