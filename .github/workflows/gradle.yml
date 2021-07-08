@@ -42,7 +42,8 @@ jobs:
         string: ${{ env.SCENARIOS }}
         split-by: ', '
     - run: | 
-        echo "${{ steps.split.outputs._1}}"
+        echo "${{ steps.split.outputs._0}}"
+        echo "${{ steps.split.outputs._2}}"
     - uses: actions/download-artifact@v2
       with:
         name: artifact
