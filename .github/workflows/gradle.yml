@@ -36,12 +36,15 @@ jobs:
       VERACODE: AWP_2aS6ShSvBuysivS8gA
       SCENARIOS: "checkmarx-v9, owasp-dep-v5, nexusiq, sonarqube-v793, veracode"
     steps:
+    - uses: jungwinter/split@v1
+      id: split
+      with:
+        msg: ${{ env.SCENARIOS }}
+        seperator: ', ' 
     - name: loop through stuff 
       run: | 
-        for f in ${{ env.SCENARIOS }}
-          do 
-            echo f
-          done
+        for s in steps.split.outputs
+          echo s
     - uses: actions/download-artifact@v2
       with:
         name: artifact
