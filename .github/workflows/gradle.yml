@@ -39,7 +39,7 @@ jobs:
     - name: run loop
       env:       
         LIST: WbJHgm_pSg-Ujk6Nt3mVdQ I33Mh0P1TwG9HuKHWkC3ug
-      run: for f in $LIST; do docker run -e POLICY_ID=f -v $GITHUB_WORKSPACE:/code -v $GITHUB_WORKSPACE:/results -e CYBRIC_API_KEY=${{ secrets.ZN_API_KEY }} zeronorth/integration:latest python cybric.py; done
+      run: for f in $LIST; do docker run -e POLICY_ID=$f -v $GITHUB_WORKSPACE:/code -v $GITHUB_WORKSPACE:/results -e CYBRIC_API_KEY=${{ secrets.ZN_API_KEY }} zeronorth/integration:latest python cybric.py; done
     - uses: rishabhgupta/split-by@v1
       id: split
       with:
