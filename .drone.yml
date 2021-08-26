@@ -20,6 +20,8 @@ steps:
 - name: ZeroNorth Security
   image: docker:dind
   user: root
+  setting:
+    debug: true
   commands:
   - sleep 5 # give docker enough time to start
   - docker --version
