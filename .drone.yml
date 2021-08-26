@@ -9,9 +9,8 @@ steps:
   commands:
   - ls -la
   - chmod +x gradle/
-  - gradle assemble
-  - gradle check
-
+  - ls -la
+  - ./gradlew build
 
 - name: SCA Scan
   image: gradle:jdk10
