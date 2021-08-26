@@ -10,7 +10,6 @@ steps:
   - chmod +x gradle/
   - ls -la
   - ./gradlew build
-  - docker --version
 
 ---
 kind: pipeline
