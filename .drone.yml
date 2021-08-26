@@ -11,14 +11,22 @@ steps:
   - chmod +x gradle/
   - ls -la
   - ./gradlew build
+  - python --version
+  - docker --version
+  
 
-- name: SCA Scan
+- name: ZeroNorth Security
   image: gradle:jdk10
   commands:
-  - curl -sSL https://download.sourceclear.com/ci.sh | sh -s -- scan
+  - docker run -e SCENARIO=owaspv5 -e POLICY_NAME=${DRONE_REPO_NAME}:owaspv5 -e TARGET_NAME=${DRONE_REPO_NAME} -e FAIL_ON_HIGH_SEVERITY=0 -e STAGE=build -e WAIT_FOR_COMPLETION=false -v DRONE_REPO_BRANCH:/code -v DRONE_REPO_BRANCH:/results -v /var/run/docker.sock:/var/run/docker.sock -e SONAR_JAVA_LIBRARY_DIR=\".\" -e SONAR_JAVA_BINARY_DIR=\".\" -e CYBRIC_API_KEY=$ZN_API_KEY zeronorth/integration:latest python cybric.py
   environment:
-    SRCCLR_API_TOKEN:
-      from_secret: SRCCLR_API_TOKEN 
+    ZN_API_KEY:
+      from_secret: ZN_API_KEY
+      
+      
+      
+      
+      
       
 - name: Download pipeline code
   image: gradle:jdk10
