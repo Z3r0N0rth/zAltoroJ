@@ -6,6 +6,7 @@ steps:
 - name: Build with Gradle
   image: gradle:jdk10
   commands:
+  - export JAVA_HOME=`/usr/libexec/java_home -v 1.8`
   - gradle assemble
   - gradle check
 
