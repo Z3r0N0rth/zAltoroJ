@@ -19,17 +19,13 @@ steps:
   - cd ../../var/ && ls -la
   - cd ../../var/run && ls -la 
   - pwd
+  - docker ps -a
   - docker run --privileged -p 12375:2375 -e DOCKER_TLS_CERTDIR="" docker:dind
   - docker run -e SCENARIO=owaspv5 -e POLICY_NAME=${DRONE_REPO_NAME}:owaspv5 -e TARGET_NAME=${DRONE_REPO_NAME} -e FAIL_ON_HIGH_SEVERITY=0 -e STAGE=build -e WAIT_FOR_COMPLETION=false -v /drone/src:/code -v /drone/src:/results -v /var/run/docker.sock:/var/run/docker.sock -e SONAR_JAVA_LIBRARY_DIR=\".\" -e SONAR_JAVA_BINARY_DIR=\".\" -e CYBRIC_API_KEY=$ZN_API_KEY zeronorth/integration:latest python cybric.py
   environment:
     SCENARIO: owaspv5
     ZN_API_KEY:
       from_secret: ZN_API_KEY
-
-volumes:
-- name: dockersock
-  host:
-    path: /var/run/docker.sock
 
 
 ---
