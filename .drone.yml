@@ -14,7 +14,7 @@ steps:
   
 
 - name: ZeroNorth Security
-  image: docker:dind
+  image: docker
   user: root
   commands:
   - docker run --help
