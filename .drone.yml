@@ -5,6 +5,9 @@ name: Security
 steps:
 - name: ZeroNorth Security
   image: docker:dind
+  volumes:
+  - name: dockersock
+    path: /var/run
   setting:
     debug: true
   commands:
