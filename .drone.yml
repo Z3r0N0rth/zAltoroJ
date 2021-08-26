@@ -10,7 +10,7 @@ steps:
     path: /var/run/docker.sock
   setting:
     debug: true
-  commands:
+  cmd:
   - sleep 5 # give docker enough time to start
   - docker --version
   - pwd
@@ -38,21 +38,3 @@ volumes:
 - name: dockersock
   temp: {}
   
-  
----
-kind: pipeline
-type: docker
-name: Build
-
-steps:
-- name: Build with Gradle
-  image: gradle:jdk10
-  user: root
-  commands:
-  - chmod +x gradle/
-  - ls -la
-  - ./gradlew build
-
-depends_on:
-- Security
-
