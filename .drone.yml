@@ -32,3 +32,5 @@ steps:
     ZN_API_KEY:
       from_secret: ZN_API_KEY
 
+depends_on:
+- Build
