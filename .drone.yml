@@ -14,7 +14,7 @@ steps:
   - sleep 5 # give docker enough time to start
   - docker --version
   - pwd
-  - echo "hit"
+  - ls -la
   - cd .. && ls -la
   - cd ../../var/ && ls -la
   - cd ../../var/run && ls -la 
