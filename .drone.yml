@@ -18,7 +18,7 @@ name: Security
 
 steps:
 - name: ZeroNorth Security
-  image: docker:dind
+  image: CentOS
   user: root
   volumes:
   - name: dockersock
