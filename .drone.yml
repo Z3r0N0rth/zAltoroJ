@@ -5,7 +5,6 @@ name: Security
 steps:
 - name: ZeroNorth Security
   image: docker:dind
-  privileged: true
   setting:
     debug: true
   commands:
