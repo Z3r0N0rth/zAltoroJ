@@ -8,7 +8,7 @@ steps:
   user: root
   commands:
   - ls -la
-  - sudo chmod +x gradle/
+  - chmod +x gradle/
   - gradle assemble
   - gradle check
 
