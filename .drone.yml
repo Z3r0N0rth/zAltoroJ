@@ -27,7 +27,6 @@ steps:
   - docker --version
   - ls -ls
   - pwd
-  - dockerd
   - echo "hit"
   - cd .. && ls -la
   - docker run hello-world
