@@ -7,12 +7,10 @@ steps:
   image: gradle:jdk10
   user: root
   commands:
-  - ls -la
   - chmod +x gradle/
   - ls -la
   - ./gradlew build
-  - python --version
-
+  
   
 
 - name: ZeroNorth Security
