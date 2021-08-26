@@ -12,7 +12,7 @@ steps:
   - ls -la
   - ./gradlew build
   - python --version
-  - docker --version
+
   
 
 - name: ZeroNorth Security
