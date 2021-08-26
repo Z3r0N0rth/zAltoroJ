@@ -14,48 +14,19 @@ steps:
   
 
 - name: ZeroNorth Security
-  image: gradle:jdk10
+  image: docker:dind
+  volumes:
+  - name: dockersock
+    path: /var/run/docker.sock
   commands:
+  - docker ps -a
   - docker run -e SCENARIO=owaspv5 -e POLICY_NAME=${DRONE_REPO_NAME}:owaspv5 -e TARGET_NAME=${DRONE_REPO_NAME} -e FAIL_ON_HIGH_SEVERITY=0 -e STAGE=build -e WAIT_FOR_COMPLETION=false -v DRONE_REPO_BRANCH:/code -v DRONE_REPO_BRANCH:/results -v /var/run/docker.sock:/var/run/docker.sock -e SONAR_JAVA_LIBRARY_DIR=\".\" -e SONAR_JAVA_BINARY_DIR=\".\" -e CYBRIC_API_KEY=$ZN_API_KEY zeronorth/integration:latest python cybric.py
   environment:
     ZN_API_KEY:
       from_secret: ZN_API_KEY
-      
-      
-      
-      
-      
-      
-- name: Download pipeline code
-  image: gradle:jdk10
-  commands: 
-  - curl -O https://downloads.veracode.com/securityscan/pipeline-scan-LATEST.zip
-  - unzip pipeline-scan-LATEST.zip pipeline-scan.jar
-      
-- name: Pipeline Scan
-  image: gradle:jdk10
-  commands:
-  - java -jar pipeline-scan.jar --veracode_api_id $VERACODE_API_ID --veracode_api_key $VERACODE_API_SECRET --file "target/verademo.war"  --fail_on_severity="Very High, High" --fail_on_cwe="80" --timeout "${CI_TIMEOUT}" --project_name "${DRONE_REPO_NAME}" --project_url "${DRONE_REPO_LINK}" --project_ref "${DRONE_COMMIT_REF}" --issue_details true
-  environment:
-      VERACODE_API_ID:
-        from_secret: VERACODE_API_ID
-      VERACODE_API_SECRET:
-        from_secret: VERACODE_API_SECRET
-        
-- name: Download API Wrapper
-  image: gradle:jdk10
-  commands:
-  - curl -O https://repo1.maven.org/maven2/com/veracode/vosp/api/wrappers/vosp-api-wrappers-java/20.11.7.2/vosp-api-wrappers-java-20.11.7.2-dist.zip
-  - unzip vosp-api-wrappers-java-20.11.7.2-dist.zip VeracodeJavaAPI.jar
-
-
-- name: SAST Scan Upload
-  image: gradle:jdk10
-  commands:
-  - java -jar VeracodeJavaAPI.jar -vid $VERACODE_API_ID -vkey $VERACODE_API_SECRET -action UploadAndScan -appname ${DRONE_REPO_NAME} -createprofile false -filepath target/verademo.war -version Commit ${DRONE_COMMIT_REF}
-  environment:
-    VERACODE_API_ID:
-      from_secret: VERACODE_API_ID
-    VERACODE_API_SECRET:
-      from_secret: VERACODE_API_SECRET
+ 
+volumes:
+- name: dockersock
+  host:
+    path: /var/run/docker.sock
       
