@@ -16,6 +16,7 @@ kind: pipeline
 type: exec
 name: Security 
 
+steps:
 - name: ZeroNorth Security
   image: docker:dind
   user: root
@@ -30,4 +31,4 @@ name: Security
   environment:
     ZN_API_KEY:
       from_secret: ZN_API_KEY
-
+depends_on: Build
