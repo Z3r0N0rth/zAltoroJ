@@ -16,9 +16,6 @@ steps:
 - name: ZeroNorth Security
   image: docker:dind
   user: root
-  volumes:
-  - name: dockersock
-    path: /var/run/docker.sock
   commands:
   - docker run --help
   - docker --version
