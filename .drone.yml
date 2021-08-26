@@ -7,7 +7,7 @@ steps:
   image: ubuntu-latest
   commands:
   - ls -la
-  - chmod 777 gradle/
+  - chmod +x gradle/
   - gradle assemble
   - gradle check
 
