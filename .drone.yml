@@ -7,7 +7,7 @@ steps:
   image: gradle:jdk10
   commands:
   - ls -la
-  - chmod +x gradle/
+  - sudo chmod +x gradle/
   - gradle assemble
   - gradle check
 
