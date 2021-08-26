@@ -4,7 +4,7 @@ name: Security
 
 steps:
 - name: ZeroNorth Security
-  image: plugins/docker
+  image: dind
   setting:
     debug: true
   commands:
