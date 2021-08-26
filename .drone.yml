@@ -5,6 +5,7 @@ name: default
 steps:
 - name: Build with Gradle
   image: gradle:jdk10
+  user: root
   commands:
   - ls -la
   - sudo chmod +x gradle/
