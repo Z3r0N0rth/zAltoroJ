@@ -4,10 +4,10 @@ name: default
 
 steps:
 - name: Build with Gradle
-  image: gradle:jdk10
+  image: ubuntu-latest
   commands:
   - ls -la
-  - chmod 777 .gradle/
+  - chmod 777 gradle/
   - gradle assemble
   - gradle check
 
