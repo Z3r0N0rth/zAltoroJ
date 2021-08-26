@@ -20,9 +20,6 @@ steps:
 - name: ZeroNorth Security
   image: ubuntu-latest
   user: root
-  volumes:
-  - name: dockersock
-    path: /var/run
   commands:
   - sleep 5 # give docker enough time to start
   - docker --version
