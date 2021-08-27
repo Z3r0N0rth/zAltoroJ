@@ -3,43 +3,22 @@ type: docker
 name: Security 
 
 steps:
-- name: ZeroNorth Security
-  image: docker:dind
-  user: root
-  volumes:
-  - name: dockersock
-    path: /var/run/docker.sock
-  setting:
-    debug: true
-  cmd:
-  - sleep 5 # give docker enough time to start
-  - DRONE_RUNNER_PRIVILEGED_IMAGES=plugins/docker,plugin/ecr
-  - docker --version
-  - pwd
+- name: Download ZeroNorth Security CLI 
+  image: gradle:jdk10
+  commands:
+  - curl -O https://support.zeronorth.io/hc/en-us/article_attachments/1500009379522/zn_cli_ubuntu2004_20210409
   - ls -la
-  - cd .. && ls -la
-  - cd ../../var/ && ls -la
-  - cd ../../var/run && ls -la 
   - pwd
-  - docker ps -a
-  - docker run -e SCENARIO=owaspv5 -e POLICY_NAME=${DRONE_REPO_NAME}:owaspv5 -e TARGET_NAME=${DRONE_REPO_NAME} -e FAIL_ON_HIGH_SEVERITY=0 -e STAGE=build -e WAIT_FOR_COMPLETION=false -v /drone/src:/code -v /drone/src:/results -v /var/run/docker.sock:/var/run/docker.sock -e SONAR_JAVA_LIBRARY_DIR=\".\" -e SONAR_JAVA_BINARY_DIR=\".\" -e CYBRIC_API_KEY=$ZN_API_KEY zeronorth/integration:latest python cybric.py
+
+- name: ZeroNorth Scans
+  image: gradle:jdk10
+  commands:
+  - java -jar VeracodeJavaAPI.jar -vid $VERACODE_API_ID -vkey $VERACODE_API_SECRET -action UploadAndScan -appname ${DRONE_REPO_NAME} -createprofile false -filepath target/verademo.war -version Commit ${DRONE_COMMIT_REF}
   environment:
-    SCENARIO: owaspv5
-    ZN_API_KEY:
-      from_secret: ZN_API_KEY
-      
-services:
-- name: docker
-  image: docker:dind
-  privileged: true
-  volumes:
-  - name: dockersock
-    path: /var/run
-
-volumes:
-- name: dockersock
-  temp: {}
-
+      SCENARIO: owaspv5
+      ZN_API_KEY:
+        from_secret: ZN_API_KEY
+        
 ---
 kind: pipeline
 type: docker
@@ -56,6 +35,7 @@ steps:
 
 depends_on:
 - Security
+
 
 
   
