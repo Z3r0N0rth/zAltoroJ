@@ -10,6 +10,7 @@ steps:
   commands:
   - sleep 5 # give docker enough time to start
   - docker --version
+  - docker run --help
   - cd .. && ls -la
   - cd ../../var/ && ls -la
   - pwd
